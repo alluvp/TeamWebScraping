@@ -85,7 +85,7 @@ def initialize_rag_system(csv_folder: str = "data"):
     print("RAG system initialized successfully!")
     return True
 
-def search_docs_st(question: str, k: int = 5) -> Dict:
+def search_docs_st(question: str, k: int = 50) -> Dict:
     """Search documents using the initialized RAG system"""
     global global_index, global_doc_texts, global_doc_matrix
     

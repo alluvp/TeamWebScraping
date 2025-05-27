@@ -82,7 +82,7 @@ def is_query_finance_related(query):
     query_lower = query.lower()
     return any(keyword in query_lower for keyword in finance_keywords)
 
-def generate_response_with_rag_claude(query, k=5):
+def generate_response_with_rag_claude(query, k=50):
     """Run RAG + Claude with tool support for financial questions"""
     try:
         if not is_query_finance_related(query):
