@@ -8,7 +8,17 @@ export default function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home' or 'chat'
   const [chatHistory, setChatHistory] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentChatId, setCurrentChatId] = useState(null)
+  const [currentChatId, setCurrentChatId] = useState(null);
+
+  // Helper function to load user-specific chat history
+  const loadUserChatHistory = (userEmail) => {
+    const savedChats = localStorage.getItem(`fintastic_chats_${userEmail}`);
+    if (savedChats) {
+      setChatHistory(JSON.parse(savedChats));
+    } else {
+      setChatHistory([]); // Reset to empty array for new users
+    }
+  };
 
   // Check for existing authentication on component mount
   useEffect(() => {
@@ -17,39 +27,39 @@ export default function App() {
       const userData = JSON.parse(savedUser);
       setUser(userData);
       setIsAuthenticated(true);
-    }
-    
-    // Load chat history if authenticated
-    const savedChats = localStorage.getItem('fintastic_chats');
-    if (savedChats) {
-      setChatHistory(JSON.parse(savedChats));
+      // Load user-specific chat history
+      loadUserChatHistory(userData.email);
     }
   }, []);
 
   const handleAuth = (email, password, username = '', authMode) => {
+    let userData;
+    
     if (authMode === 'signup') {
-      const newUser = {
+      userData = {
         id: Date.now(),
         email,
         username: username || email.split('@')[0],
         createdAt: new Date().toISOString()
       };
-      localStorage.setItem('fintastic_user', JSON.stringify(newUser));
-      setUser(newUser);
-
     } else {
       // For demo purposes, create user from login info
       // In real app, you'd validate against a backend
-      const loginUser = {
+      userData = {
         id: Date.now(),
         email,
         username: email.split('@')[0],
         createdAt: new Date().toISOString()
       };
-      localStorage.setItem('fintastic_user', JSON.stringify(loginUser));
-      setUser(loginUser);
     }
+    
+    localStorage.setItem('fintastic_user', JSON.stringify(userData));
+    setUser(userData);
     setIsAuthenticated(true);
+    
+    // ✅ Load user-specific chat history after authentication
+    loadUserChatHistory(userData.email);
+    
     setCurrentView('chat');
   };
 
@@ -57,6 +67,8 @@ export default function App() {
     localStorage.removeItem('fintastic_user');
     setUser(null);
     setIsAuthenticated(false);
+    setChatHistory([]); // ✅ Clear chat history on logout
+    setCurrentChatId(null); // ✅ Reset current chat ID
     setCurrentView('home');
   };
 

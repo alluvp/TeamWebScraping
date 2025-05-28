@@ -31,7 +31,7 @@ const HomePage = ({
               <TrendingUp className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-2xl font-bold text-gray-800">
-              {authMode === 'login' ? 'Welcome Back' : 'Join FinTastic'}
+              {authMode === 'login' ? 'Welcome Back' : 'Join FiscaleAI'}
             </h2>
             <p className="text-gray-600 mt-2">
               {authMode === 'login' ? 'Sign in to access your financial insights' : 'Create your free account'}
@@ -122,7 +122,7 @@ const HomePage = ({
                   <TrendingUp className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-green-700 to-green-800 bg-clip-text text-transparent">
-                  FinTastic
+                  FiscaleAI
                 </span>
               </div>
             </div>
@@ -203,7 +203,7 @@ const HomePage = ({
               <TrendingUp className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-green-700 to-green-800 bg-clip-text text-transparent">
-              FinTastic
+              FiscaleAI
             </span>
           </div>
           
@@ -237,7 +237,7 @@ const HomePage = ({
             <TrendingUp className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-green-700 to-green-800 bg-clip-text text-transparent mb-6">
-            FinTastic
+            FiscaleAI
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
             AI-powered financial research assistant that transforms complex market data into actionable insights
@@ -336,7 +336,7 @@ const HomePage = ({
             Ready to Transform Your Financial Analysis?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join investors and analysts using FinTastic for smarter financial decisions
+            Join investors and analysts using FiscaleAI for smarter financial decisions
           </p>
           <button
             onClick={() => setShowAuth(true)}
